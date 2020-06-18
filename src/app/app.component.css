@@ -1,0 +1,10 @@
+@font-face {
+  font-family: GreatVibes;
+  src: url(../assets/fonts/GreatVibes-Regular.otf) format('truetype');
+}
+
+::ng-deep .great-vibes-font {
+  color: white;
+  font-family: GreatVibes, sans-serif;
+  font-size: 2rem;
+}

@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {version} from '../../../../package.json';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
   public appVersion: string;
@@ -12,6 +13,6 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.appVersion = version;
   }
-
 }

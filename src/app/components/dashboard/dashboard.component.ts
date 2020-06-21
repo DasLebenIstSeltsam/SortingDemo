@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {version} from '../../../../package.json';
 
 @Component({
@@ -6,7 +6,7 @@ import {version} from '../../../../package.json';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, AfterViewInit {
+export class DashboardComponent implements OnInit {
   appVersion: string;
 
   constructor() {
@@ -14,21 +14,5 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.appVersion = version;
-  }
-
-  ngAfterViewInit(): void {
-    this.calculateChartContainerHeight();
-  }
-
-  onWindowResize() {
-    this.calculateChartContainerHeight();
-  }
-
-  calculateChartContainerHeight() {
-    const headerHeight = parseInt(window.getComputedStyle(document.querySelector('header')).height, 10);
-    const footerHeight = parseInt(window.getComputedStyle(document.querySelector('footer')).height, 10);
-
-    const chartContainerElement: HTMLElement = document.querySelector('#chart-container');
-    chartContainerElement.style.height = `${window.innerHeight - (headerHeight + footerHeight)}px`;
   }
 }

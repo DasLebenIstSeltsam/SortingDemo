@@ -6,6 +6,7 @@ import {DashboardComponent} from './components/dashboard/dashboard.component';
 import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {ChartContainerComponent} from './components/chart-container/chart-container.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {ChartContainerComponent} from './components/chart-container/chart-contai
     ChartContainerComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,8 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ChartConfig} from '../../config/chart.config';
+import {GeneratingService} from '../../services/generating/generating.service';
+import {SliderConfig} from '../../config/slider.config';
+import {BaseChartDirective} from 'ng2-charts';
 
 @Component({
   selector: 'app-chart-container',
@@ -8,12 +11,18 @@ import {ChartConfig} from '../../config/chart.config';
 })
 export class ChartContainerComponent implements OnInit, AfterViewInit {
 
-  public chartConfig = ChartConfig;
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
+  chartConfig = ChartConfig;
+  sliderConfig = SliderConfig;
+  datasetSize: number;
+  sleepDuration: number;
 
-  constructor() {
+  constructor(private generatingService: GeneratingService) {
   }
 
   ngOnInit(): void {
+    this.datasetSize = this.sliderConfig.datasetSize.stepsArray[0].value;
+    this.sleepDuration = this.sliderConfig.sleepDuration.stepsArray[0].value;
   }
 
   ngAfterViewInit(): void {
@@ -34,5 +43,9 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
     chartContainerElement.style.maxHeight = containerMaxHeight;
     chartContainerElement.style.minHeight = containerMaxHeight;
     chartElement.style.maxHeight = containerMaxHeight;
+  }
+
+  generateDataset() {
+    this.generatingService.generateDataset(this.chart, this.datasetSize, this.sleepDuration);
   }
 }

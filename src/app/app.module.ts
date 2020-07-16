@@ -7,6 +7,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {FooterComponent} from './components/footer/footer.component';
 import {ChartContainerComponent} from './components/chart-container/chart-container.component';
 import {ChartsModule} from 'ng2-charts';
+import {Ng5SliderModule} from 'ng5-slider';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {ChartsModule} from 'ng2-charts';
   ],
   imports: [
     BrowserModule,
-    ChartsModule
+    ChartsModule,
+    Ng5SliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -8,7 +8,7 @@
         <ng5-slider [(value)]="sleepDuration" [options]="sliderConfig.sleepDuration"></ng5-slider>
       </div>
       <div class="row p-2 d-flex justify-content-center">
-        <button class="btn btn-primary" (click)="generateDataset()">Generate</button>
+        <button class="btn btn-success" (click)="generateDataset()">Generate</button>
       </div>
     </div>
     <div class="col-10 p-3">
@@ -16,10 +16,10 @@
         <canvas
           id="chart"
           baseChart
-          [datasets]="chartConfig.barChartData"
-          [labels]="chartConfig.barChartLabels"
-          [options]="chartConfig.barChartOptions"
-          [chartType]="chartConfig.barChartType">
+          [datasets]="chartConfig.chartData"
+          [labels]="chartConfig.chartLabels"
+          [options]="chartConfig.chartOptions"
+          [chartType]="chartConfig.chartType">
         </canvas>
       </div>
     </div>

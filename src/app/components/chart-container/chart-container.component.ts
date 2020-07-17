@@ -3,6 +3,7 @@ import {ChartConfig} from '../../config/chart.config';
 import {GeneratingService} from '../../services/generating/generating.service';
 import {SliderConfig} from '../../config/slider.config';
 import {BaseChartDirective} from 'ng2-charts';
+import {UserSettings} from '../../interfaces/user-settings';
 
 @Component({
   selector: 'app-chart-container',
@@ -14,15 +15,17 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
   chartConfig = ChartConfig;
   sliderConfig = SliderConfig;
-  datasetSize: number;
-  sleepDuration: number;
+  userSettings: UserSettings;
 
   constructor(private generatingService: GeneratingService) {
   }
 
   ngOnInit(): void {
-    this.datasetSize = this.sliderConfig.datasetSize.stepsArray[0].value;
-    this.sleepDuration = this.sliderConfig.sleepDuration.stepsArray[0].value;
+    this.userSettings = {
+      datasetSize: this.sliderConfig.datasetSize.stepsArray[0].value,
+      sleepDuration: this.sliderConfig.sleepDuration.stepsArray[0].value,
+      isButtonDisabled: false
+    };
   }
 
   ngAfterViewInit(): void {
@@ -46,6 +49,7 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
   }
 
   generateDataset() {
-    this.generatingService.generateDataset(this.chart, this.datasetSize, this.sleepDuration);
+    this.userSettings.isButtonDisabled = true;
+    this.generatingService.generateDataset(this.chart, this.userSettings).then(() => this.userSettings.isButtonDisabled = false);
   }
 }

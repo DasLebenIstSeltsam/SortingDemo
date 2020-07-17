@@ -11,20 +11,20 @@ export class GeneratingService {
   }
 
   generateDataset(chart: BaseChartDirective, userSettings: UserSettings): Promise<void> {
-    return generateDatasetFunctionAsync(chart, userSettings.datasetSize, userSettings.sleepDuration);
+    return generateDatasetFunctionAsync(chart, userSettings);
   }
 }
 
-async function generateDatasetFunctionAsync(chart: BaseChartDirective, datasetSize: number, sleepDuration: number) {
+async function generateDatasetFunctionAsync(chart: BaseChartDirective, userSettings: UserSettings) {
   const chartData = chart.chart.config.data;
   chartData.labels = [];
   chartData.datasets[0].data = [];
 
-  for (let i = 1; i <= datasetSize; i++) {
+  for (let i = 1; i <= userSettings.datasetSize; i++) {
     chartData.labels.push('');
     chartData.datasets[0].data.push(Math.random());
 
-    await sleep(sleepDuration);
+    await sleep(userSettings.sleepDuration);
 
     chart.update();
   }

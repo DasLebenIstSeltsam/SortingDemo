@@ -49,7 +49,12 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
   }
 
   generateDataset() {
-    this.isButtonDisabled = true;
-    this.generatingService.generateDataset(this.chart, this.userSettings).then(() => this.isButtonDisabled = false);
+    this.toggleControls();
+    this.generatingService.generateDataset(this.chart, this.userSettings).then(() => this.toggleControls());
+  }
+
+  toggleControls() {
+    this.isButtonDisabled = !this.isButtonDisabled;
+    this.sliderConfig.datasetSize = Object.assign({}, this.sliderConfig.datasetSize, {disabled: this.isButtonDisabled});
   }
 }

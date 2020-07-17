@@ -1,0 +1,7 @@
+::ng-deep #chart-container .ng5-slider .ng5-slider-pointer {
+  background-color: #007bff;
+}
+
+::ng-deep #chart-container .ng5-slider[disabled] .ng5-slider-pointer {
+  background-color: rgb(0, 123, 255, 0.65);
+}

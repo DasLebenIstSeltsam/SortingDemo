@@ -2,6 +2,7 @@ import {Options} from 'ng5-slider';
 
 export class SliderConfig {
   public static datasetSize: Options = {
+    disabled: false,
     showTicksValues: true,
     stepsArray: [
       {value: 50},
@@ -13,6 +14,7 @@ export class SliderConfig {
   };
 
   public static sleepDuration: Options = {
+    disabled: false,
     showTicksValues: true,
     stepsArray: [
       {value: 0},

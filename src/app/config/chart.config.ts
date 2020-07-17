@@ -2,14 +2,16 @@ import * as chartJs from 'chart.js';
 import {Label} from 'ng2-charts/lib/base-chart.directive';
 
 export class ChartConfig {
+  private static chartColor = 'rgb(0,123,255, 0.75)';
+
   public static chartType: chartJs.ChartType = 'bar';
   public static chartLabels: Label[] = [];
   public static chartData: chartJs.ChartDataSets[] = [{
-    backgroundColor: 'rgb(40,167,69)',
-    borderColor: 'rgb(13,185,240)',
-    borderWidth: 0,
-    hoverBackgroundColor: 'rgb(13,185,240)',
-    hoverBorderColor: 'rgb(13,185,240)',
+    backgroundColor: ChartConfig.chartColor,
+    borderColor: ChartConfig.chartColor,
+    borderWidth: 1,
+    hoverBackgroundColor: ChartConfig.chartColor,
+    hoverBorderColor: ChartConfig.chartColor,
     hoverBorderWidth: 0,
     data: []
   }];

@@ -16,6 +16,7 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
   chartConfig = ChartConfig;
   sliderConfig = SliderConfig;
   userSettings: UserSettings;
+  isButtonDisabled: boolean;
 
   constructor(private generatingService: GeneratingService) {
   }
@@ -24,7 +25,6 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
     this.userSettings = {
       datasetSize: this.sliderConfig.datasetSize.stepsArray[0].value,
       sleepDuration: this.sliderConfig.sleepDuration.stepsArray[0].value,
-      isButtonDisabled: false
     };
   }
 
@@ -49,7 +49,7 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
   }
 
   generateDataset() {
-    this.userSettings.isButtonDisabled = true;
-    this.generatingService.generateDataset(this.chart, this.userSettings).then(() => this.userSettings.isButtonDisabled = false);
+    this.isButtonDisabled = true;
+    this.generatingService.generateDataset(this.chart, this.userSettings).then(() => this.isButtonDisabled = false);
   }
 }

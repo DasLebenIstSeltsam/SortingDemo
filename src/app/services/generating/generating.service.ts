@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BaseChartDirective} from 'ng2-charts';
-import {UserSettings} from '../../interfaces/user-settings';
+import {UserSettingsInterface} from '../../interfaces/user-settings.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +10,12 @@ export class GeneratingService {
   constructor() {
   }
 
-  generateDataset(chart: BaseChartDirective, userSettings: UserSettings): Promise<void> {
+  generateDataset(chart: BaseChartDirective, userSettings: UserSettingsInterface): Promise<void> {
     return generateDatasetFunctionAsync(chart, userSettings);
   }
 }
 
-async function generateDatasetFunctionAsync(chart: BaseChartDirective, userSettings: UserSettings) {
+async function generateDatasetFunctionAsync(chart: BaseChartDirective, userSettings: UserSettingsInterface) {
   const chartData = chart.chart.config.data;
   chartData.labels = [];
   chartData.datasets[0].data = [];

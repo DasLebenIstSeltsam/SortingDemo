@@ -18,7 +18,7 @@ export class ChartConfig {
   public static chartOptions: chartJs.ChartOptions = {
     responsive: true,
     animation: {
-      duration: 100,
+      duration: 0,
       easing: 'linear'
     },
     tooltips: {

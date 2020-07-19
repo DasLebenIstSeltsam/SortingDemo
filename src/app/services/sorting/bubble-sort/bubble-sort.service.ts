@@ -11,29 +11,25 @@ export class BubbleSortService implements SortingServiceInterface {
   constructor() {
   }
 
-  sort(chart: BaseChartDirective, userSettings: UserSettingsInterface): Promise<void> {
-    return bubbleSortAsync(chart, userSettings);
-  }
-}
+  async sort(chart: BaseChartDirective, userSettings: UserSettingsInterface): Promise<void> {
+    const dataset = chart.datasets[0].data;
+    let swapped;
 
-async function bubbleSortAsync(chart: BaseChartDirective, userSettings: UserSettingsInterface) {
-  const dataset = chart.datasets[0].data;
-  let swapped;
+    do {
+      swapped = false;
+      for (let i = 0; i < dataset.length; i++) {
+        if (dataset[i] > dataset[i + 1]) {
+          const tmp = dataset[i];
+          dataset[i] = dataset[i + 1];
+          dataset[i + 1] = tmp;
+          swapped = true;
 
-  do {
-    swapped = false;
-    for (let i = 0; i < dataset.length; i++) {
-      if (dataset[i] > dataset[i + 1]) {
-        const tmp = dataset[i];
-        dataset[i] = dataset[i + 1];
-        dataset[i + 1] = tmp;
-        swapped = true;
-
-        await sleep(userSettings.sleepDuration);
-        chart.update();
+          await sleep(userSettings.sleepDuration);
+          chart.update();
+        }
       }
-    }
-  } while (swapped);
+    } while (swapped);
+  }
 }
 
 function sleep(sleepDuration) {

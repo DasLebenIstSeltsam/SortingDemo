@@ -1,12 +1,12 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ChartConfig} from '../../config/chart.config';
-import {GeneratingService} from '../../services/generating/generating.service';
-import {SliderConfig} from '../../config/slider.config';
+import {ChartConfig} from '../../../../config/chart.config';
+import {GeneratingService} from '../../../../services/generating/generating.service';
+import {SliderConfig} from '../../../../config/slider.config';
 import {BaseChartDirective} from 'ng2-charts';
-import {UserSettingsInterface} from '../../interfaces/user-settings.interface';
-import {SortingAlgorithmTypeEnum} from '../../enums/sorting-algorithm-type.enum';
-import {SortingService} from '../../services/sorting/sorting.service';
-import {SortingAlgorithmTypeInterface} from '../../interfaces/sorting-algorithm-type.interface';
+import {UserSettingsInterface} from '../../../../interfaces/user-settings.interface';
+import {SortingAlgorithmTypeEnum} from '../../../../enums/sorting-algorithm-type.enum';
+import {SortingService} from '../../../../services/sorting/sorting.service';
+import {SortingAlgorithmTypeInterface} from '../../../../interfaces/sorting-algorithm-type.interface';
 
 @Component({
   selector: 'app-chart-container',
@@ -66,9 +66,6 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
   }
 
   onAlgorithmSelection($event: Event) {
-    console.log(this.userSettings);
-    console.log(($event.target as HTMLSelectElement).value);
-    console.log(SortingAlgorithmTypeEnum[($event.target as HTMLSelectElement).value]);
     this.userSettings.sortingAlgorithm = SortingAlgorithmTypeEnum[($event.target as HTMLSelectElement).value];
   }
 

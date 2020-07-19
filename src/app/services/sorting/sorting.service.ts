@@ -4,6 +4,7 @@ import {UserSettingsInterface} from '../../interfaces/user-settings.interface';
 import {SortingServiceInterface} from '../../interfaces/sorting-service.interface';
 import {SortingAlgorithmTypeEnum} from '../../enums/sorting-algorithm-type.enum';
 import {BubbleSortService} from './bubble-sort/bubble-sort.service';
+import {QuickSortService} from './quick-sort/quick-sort.service';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,9 @@ export class SortingService {
     switch (algorithmType) {
       case (SortingAlgorithmTypeEnum.BUBBLE_SORT):
         this.sortingService = new BubbleSortService();
+        break;
+      case (SortingAlgorithmTypeEnum.QUICK_SORT):
+        this.sortingService = new QuickSortService();
         break;
       default:
         this.sortingService = null;

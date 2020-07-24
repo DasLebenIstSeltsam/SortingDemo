@@ -7,12 +7,6 @@
                     [(value)]="userSettings.datasetSize"
                     [options]="sliderConfig.datasetSize"></ng5-slider>
       </div>
-      <div class="row p-2">
-        <label for="sleepDurationSlider">Sleep duration</label>
-        <ng5-slider id="sleepDurationSlider"
-                    [(value)]="userSettings.sleepDuration"
-                    [options]="sliderConfig.sleepDuration"></ng5-slider>
-      </div>
       <div class="row p-2 d-flex justify-content-center">
         <button class="btn btn-primary"
                 [disabled]="areControlsDisabled"
@@ -31,6 +25,12 @@
             {{sortingAlgorithm.value}}
           </option>
         </select>
+      </div>
+      <div class="row p-2">
+        <label for="sleepDurationSlider">Sleep duration (ms)</label>
+        <ng5-slider id="sleepDurationSlider"
+                    [(value)]="userSettings.sleepDuration"
+                    [options]="sliderConfig.sleepDuration"></ng5-slider>
       </div>
       <div class="row p-2 d-flex justify-content-center">
         <button class="btn btn-primary"

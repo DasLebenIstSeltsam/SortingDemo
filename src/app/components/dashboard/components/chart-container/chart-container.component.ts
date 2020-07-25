@@ -7,6 +7,7 @@ import {UserSettingsInterface} from '../../../../interfaces/user-settings.interf
 import {SortingAlgorithmTypeEnum} from '../../../../enums/sorting-algorithm-type.enum';
 import {SortingService} from '../../../../services/sorting/sorting.service';
 import {SortingAlgorithmTypeInterface} from '../../../../interfaces/sorting-algorithm-type.interface';
+import {SimpleTimer} from 'ng2-simple-timer';
 
 @Component({
   selector: 'app-chart-container',
@@ -21,8 +22,10 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
   userSettings: UserSettingsInterface;
   areControlsDisabled: boolean;
   sortingAlgorithmTypeArray: SortingAlgorithmTypeInterface[];
+  timerName: string;
+  sortingDuration: number;
 
-  constructor(private generatingService: GeneratingService, private sortingService: SortingService) {
+  constructor(private generatingService: GeneratingService, private sortingService: SortingService, private simpleTimer: SimpleTimer) {
   }
 
   private static calculateChartContainerHeight() {
@@ -45,6 +48,10 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
       sleepDuration: this.sliderConfig.sleepDuration.stepsArray[0].value,
       sortingAlgorithm: SortingAlgorithmTypeEnum[this.sortingAlgorithmTypeArray[0].key],
     };
+
+    this.sortingDuration = 0;
+    this.timerName = '1s';
+    this.simpleTimer.newTimer(this.timerName, 1);
   }
 
   ngAfterViewInit(): void {
@@ -62,7 +69,13 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
 
   sortDataset() {
     this.toggleControls();
-    this.sortingService.sortDataset(this.chart, this.userSettings).then(() => this.toggleControls());
+    this.sortingDuration = 0;
+    const timerId = this.simpleTimer.subscribe(this.timerName, () => this.updateSortingDuration());
+
+    this.sortingService.sortDataset(this.chart, this.userSettings).then(() => {
+      this.simpleTimer.unsubscribe(timerId);
+      this.toggleControls();
+    });
   }
 
   onAlgorithmSelection($event: Event) {
@@ -76,5 +89,9 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
 
   private mapSortingAlgorithmTypeEnumToArray() {
     return Object.keys(SortingAlgorithmTypeEnum).map(key => ({key, value: SortingAlgorithmTypeEnum[key]}));
+  }
+
+  private updateSortingDuration() {
+    this.sortingDuration++;
   }
 }

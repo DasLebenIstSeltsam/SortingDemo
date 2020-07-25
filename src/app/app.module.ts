@@ -8,6 +8,7 @@ import {FooterComponent} from './components/dashboard/components/footer/footer.c
 import {ChartContainerComponent} from './components/dashboard/components/chart-container/chart-container.component';
 import {ChartsModule} from 'ng2-charts';
 import {Ng5SliderModule} from 'ng5-slider';
+import {SimpleTimer} from 'ng2-simple-timer';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {Ng5SliderModule} from 'ng5-slider';
     ChartsModule,
     Ng5SliderModule
   ],
-  providers: [],
+  providers: [SimpleTimer],
   bootstrap: [AppComponent]
 })
 export class AppModule {

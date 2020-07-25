@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
-import {SortingServiceInterface} from '../../../interfaces/sorting-service.interface';
+import {SortService} from '../../../abstract-classes/sort.service';
 import {BaseChartDirective} from 'ng2-charts';
 import {UserSettingsInterface} from '../../../interfaces/user-settings.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class QuickSortService implements SortingServiceInterface {
+export class QuickSortService extends SortService {
 
   constructor() {
+    super();
   }
 
   // tslint:disable-next-line:max-line-length
-  private static async partition(chart: BaseChartDirective, userSettings: UserSettingsInterface, dataset: number[], leftIndex: number, rightIndex: number) {
+  private async partition(chart: BaseChartDirective, userSettings: UserSettingsInterface, dataset: number[], leftIndex: number, rightIndex: number) {
     const pivot = dataset[Math.floor((rightIndex + leftIndex) / 2)];
     let i = leftIndex;
     let j = rightIndex;
@@ -31,7 +32,7 @@ export class QuickSortService implements SortingServiceInterface {
         i++;
         j--;
 
-        await sleep(userSettings.sleepDuration);
+        await this.sleep(userSettings.sleepDuration);
         chart.update();
       }
     }
@@ -49,7 +50,7 @@ export class QuickSortService implements SortingServiceInterface {
     let index;
 
     if (dataset.length - 1 > 1) {
-      index = await QuickSortService.partition(chart, userSettings, dataset, leftIndex, rightIndex);
+      index = await this.partition(chart, userSettings, dataset, leftIndex, rightIndex);
 
       if (leftIndex < index - 1) {
         await this.quickSort(chart, userSettings, dataset, leftIndex, index - 1);
@@ -59,8 +60,4 @@ export class QuickSortService implements SortingServiceInterface {
       }
     }
   }
-}
-
-function sleep(sleepDuration) {
-  return new Promise(resolve => setTimeout(resolve, sleepDuration));
 }

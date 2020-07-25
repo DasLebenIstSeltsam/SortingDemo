@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
-import {SortingServiceInterface} from '../../../interfaces/sorting-service.interface';
+import {SortService} from '../../../abstract-classes/sort.service';
 import {BaseChartDirective} from 'ng2-charts';
 import {UserSettingsInterface} from '../../../interfaces/user-settings.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SelectionSortService implements SortingServiceInterface {
+export class SelectionSortService extends SortService {
 
   constructor() {
+    super();
   }
 
   async sort(chart: BaseChartDirective, userSettings: UserSettingsInterface): Promise<void> {
@@ -27,13 +28,9 @@ export class SelectionSortService implements SortingServiceInterface {
         dataset[i] = dataset[min];
         dataset[min] = tmp;
 
-        await sleep(userSettings.sleepDuration);
+        await this.sleep(userSettings.sleepDuration);
         chart.update();
       }
     }
   }
-}
-
-function sleep(sleepDuration) {
-  return new Promise(resolve => setTimeout(resolve, sleepDuration));
 }

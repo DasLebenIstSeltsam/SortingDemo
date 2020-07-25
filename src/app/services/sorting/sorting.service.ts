@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BaseChartDirective} from 'ng2-charts';
 import {UserSettingsInterface} from '../../interfaces/user-settings.interface';
-import {SortingServiceInterface} from '../../interfaces/sorting-service.interface';
+import {SortService} from '../../abstract-classes/sort.service';
 import {SortingAlgorithmTypeEnum} from '../../enums/sorting-algorithm-type.enum';
 import {BubbleSortService} from './bubble-sort/bubble-sort.service';
 import {QuickSortService} from './quick-sort/quick-sort.service';
@@ -12,7 +12,7 @@ import {SelectionSortService} from './selection-sort/selection-sort.service';
 })
 export class SortingService {
 
-  private sortingService: SortingServiceInterface;
+  private sortingService: SortService;
 
   constructor() {
   }

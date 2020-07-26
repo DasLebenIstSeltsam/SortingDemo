@@ -7,9 +7,9 @@ export class SliderConfig {
     stepsArray: [
       {value: 50},
       {value: 100},
-      {value: 250},
-      {value: 500},
-      {value: 1000},
+      {value: 200},
+      {value: 400},
+      {value: 800},
     ]
   };
 
@@ -18,10 +18,10 @@ export class SliderConfig {
     showTicksValues: true,
     stepsArray: [
       {value: 0},
-      {value: 50},
       {value: 100},
       {value: 250},
       {value: 500},
+      {value: 1000},
     ]
   };
 }

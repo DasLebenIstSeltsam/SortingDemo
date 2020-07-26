@@ -6,6 +6,7 @@ import {UserSettingsInterface} from '../../interfaces/user-settings.interface';
   providedIn: 'root'
 })
 export class GeneratingService {
+  private generatedDataset: number[];
 
   constructor() {
   }
@@ -14,11 +15,31 @@ export class GeneratingService {
     const chartData = chart.chart.config.data;
     chartData.labels = [];
     chartData.datasets[0].data = [];
+    this.generatedDataset = [];
 
-    for (let i = 1; i <= userSettings.datasetSize; i++) {
+    for (let i = 0; i < userSettings.datasetSize; i++) {
+      const randomNumber = Math.random();
+      this.generatedDataset.push(randomNumber);
+
       chartData.labels.push('');
-      chartData.datasets[0].data.push(Math.random());
+      chartData.datasets[0].data.push(randomNumber);
     }
+
+    chart.update();
+  }
+
+  async regenerateDataset(chart: BaseChartDirective, userSettings: UserSettingsInterface): Promise<void> {
+    const chartData = chart.chart.config.data;
+    chartData.labels = [];
+    chartData.datasets[0].data = [];
+
+    for (let i = 0; i < userSettings.datasetSize; i++) {
+      const randomNumber = this.generatedDataset[i];
+
+      chartData.labels.push('');
+      chartData.datasets[0].data.push(randomNumber);
+    }
+
     chart.update();
   }
 }

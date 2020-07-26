@@ -67,6 +67,11 @@ export class ChartContainerComponent implements OnInit, AfterViewInit {
     this.generatingService.generateDataset(this.chart, this.userSettings).then(() => this.toggleControls());
   }
 
+  regenerateDataset() {
+    this.toggleControls();
+    this.generatingService.regenerateDataset(this.chart, this.userSettings).then(() => this.toggleControls());
+  }
+
   sortDataset() {
     this.toggleControls();
     this.sortingDuration = 0;
